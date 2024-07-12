@@ -41,6 +41,6 @@ which simplify to the following:
 $$
 \begin{align}
 \alpha &= \bar{y}- \frac{\text{Cov(x,y)}}{\text{Var(x)}}\bar{x} \\
-\Beta &= \frac{\text{Cov}(x,y)}{\text{Var}(x)}
+\beta &= \frac{\text{Cov}(x,y)}{\text{Var}(x)}
 \end{align}
 $$
