@@ -126,3 +126,7 @@ X^TX\beta &= X^Ty \\
 \beta &= (X^TX)^{-1}X^Ty
 \end{align}
 $$
+
+## multiple linear regression with stochastic gradient descent
+
+resume `multiple_linear_regression_ols.py` implementation
