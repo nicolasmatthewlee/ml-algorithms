@@ -232,8 +232,37 @@ $$
 
 Thereby demonstrating the convergence $e_k\to0$, or $x_k\to x^*$, as $k\to \infty$
 
+## k-means clustering
+
+The objective is to partition a set of $n$ vector-valued observations $x_1,x_2,\dots,x_n$ into $k$ sets $S_1,S_2,...,S_k$.
+
+Let $\mu_i$ be the mean vector (centroid) of $S_i$:
+$$\mu_i=\frac{\sum_{x\in S_i}x}{|S_i|}$$
+
+Let $\|x\|$ denote the $L_2$ norm as follows:
+$$\|x\|=\sqrt{x_1^2+x_2^2+\dots+x_n^2}=\sqrt{\sum_{i=1}^{n}{x_i^2}}$$
+
+The objective function to be minimized can then be defined as follows:
+$$\sum_{i=1}^{k}\sum_{x\in S_i}\|x-\mu_i\|^2$$
+
+Let $m_i^{(t)}$ denote the centroid of $S_i$ after $t$ iterations. Given an initial set of $k$ centroids $m_1^{(0)},m_2^{(0)},\dots,m_k^{(0)}$ the k-means algorithm sequentially sets $S_1^{(t)},S_2^{(t)},\dots,S_n^{(t)}$ to be the set of observations that are closer or as close to its centroid than all others by according to Euclidean distance:
+
+$$
+S_i^{(t)}=\{x_k:x_k\notin S_j\land\|x_k-m_i^{(t)}\|^2\le\|x_k-m_j^{(t)}\|^2\forall_{j\in[1,k],j\ne i}\}
+$$
+
+Then, the algorithm recalculates the centroids for each set to be used in the next iteration:
+
+$$
+m_i^{(t+1)}=\frac{\sum_{x\in S_i^{(t)}}{x}}{|S_i^{(t)}|}
+$$
+
+Let the error of set $S_i$ after $t$ iterations, $e_i^{(t)}$ be defined as follows:
+$$e_i^{(t)}=\sum_{x\in S_i^{(t)}}{\|x-m_i^{(t)}\|^2}$$
+
+Observe that this error is minimized when $m_i^{(t)}$ is the centroid of $S_i^{(t)}$. Therefore, updating $m_1,m_2,...,m_n$ will only result in the total error decreasing or remaining the same. Now consider reassigning an element to set $S_i$. If the element is already in $S_i$, its distance to the nearest centroid remains the same and thus the error contributed by that observation remains the same. If the element is reassigned to $S_j$, it is because the euclidean distance between $m_j$ is less than $m_i$, and therefore the error contributed by that observation will decrease. Therefore, reassigning observations will only result in the total error decreasing or remaining the same. Thus, the k-means algorithm error is a monotonically decreasing function.
+
 ---
 
 - gradient descent in multiple dimensions
 - multiple linear regression with stochastic gradient descent
-- k-means clustering
