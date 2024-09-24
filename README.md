@@ -127,6 +127,113 @@ X^TX\beta &= X^Ty \\
 \end{align}
 $$
 
-## multiple linear regression with stochastic gradient descent
+## gradient descent
 
-resume `multiple_linear_regression_ols.py` implementation
+Let $f:\mathbb{R}\to\mathbb{R}$ be a twice-differentiable, strongly convex function with a Lipschitz continuous derivative.
+
+A Lipschitz continuous derivative implies the following:
+$$\exists_{L>0}\forall_{x_1,x_2\in\mathbb{R}}|f'(x_1)-f'(x_2)|\le L|x_1-x_2|\land \forall_{x\in\mathbb{R}}f''(x)\le L$$
+
+Let $\alpha$ be a constant satisfying the following:
+$$0<\alpha<\frac{1}{L}$$
+
+The gradient descent algorithm is defined as follows:
+$$x_{k+1}=x_k-\alpha f'(x_k)$$
+
+Let $x^*$ be the unique minimum of $f$.
+
+Let the error at step $k$, $e_k$ be defined as follows:
+$$e_k=x_k-x^*$$
+
+The error at step $k+1$ can be written as follows:
+
+$$
+\begin{align}
+e_{k+1}&=x_{k+1}-x^* \\
+&=x_k-\alpha f'(x_k)-x^* \\
+&=x_k-x^*-\alpha f'(x_k) \\
+&=e_k-\alpha f'(x_k)
+\end{align}
+$$
+
+Strong convexity implies the following:
+$$\exists_{\mu>0}\forall_{x\in\mathbb{R}}f''(x)\ge\mu$$
+
+Which implies that $f'(x)$ is strictly increasing. Apply the Mean Value Theorem to $f'(x)$ as follows:
+$$\exists_{c \in [x_k, x^{*}]}\frac{f'(x_k) - f'(x^*)}{x_k - x^*} = f''(c)$$
+
+Given that $\forall_{x\in\mathbb{R}}f''(x)\ge\mu$ and $f'(x^*)=0$,
+
+$$
+\begin{align}
+\frac{f'(x_k)-f'(x^*)}{x_k-x^*}& \ge \mu \\
+f'(x_k)-f'(x^*)& \ge \mu(x_k-x^*) \\
+f'(x_k)& \ge \mu e_k \\
+\end{align}
+$$
+
+Note that $\forall_{k}$, $f'(x_k)$ and $e_k$ have the same sign. Applying the defintion of Lipschitz continuity between $x_k$ and $x^*$ gives the following:
+
+$$
+\begin{align}
+\left| f'(x_k) - f'(x^*) \right| &\leq L \left| x_k - x^* \right| \\
+\left| f'(x_k) \right| &\leq L \left| e_k \right| \\
+f'(x_k) &\leq L e_k
+\end{align}
+$$
+
+Recall the following result derived earlier:
+$$e_{k+1} = e_k-\alpha f'(x_k)$$
+
+Now observe the following bounds on $e_{k+1}$:
+
+$$
+\begin{align}
+e_{k+1}&\le e_k-\alpha \mu e_k \\
+&= e_k(1-\alpha\mu)\\
+e_{k+1} &\ge e_k-\alpha Le_k \\
+&= e_k(1-\alpha L) \\
+&\therefore \\
+e_k(1-\alpha L) &\le e_{k+1} \le e_k(1-\alpha\mu) \\
+\end{align}
+$$
+
+Recall the following constraints and note the bounds that follow:
+
+$$
+\begin{align}
+L &>0 \\
+0&<\alpha<\frac{1}{L} \\
+0&<\mu\le f''(x)\le L \\
+\therefore \\
+\alpha L &< \frac{1}{L}L = 1 \\
+\alpha\mu &< \frac{1}{L} = 1 \\
+\end{align}
+$$
+
+Therefore, $e_{k+1}$ is bounded within positive scalar multiples of $e_k$. Now observe the following recurrence relation:
+
+$$
+\begin{align}
+e_{k+1} &\le e_k(1-\alpha\mu) \\
+e_{k} &\le e_{k-1}(1-\alpha\mu) \\
+&\therefore \\
+e_{k+1} &\le e_{k-1}(1-\alpha\mu)^2 \\
+\end{align}
+$$
+
+Which can be simplified to the following:
+
+$$
+\begin{align}
+e_{k} &\le e_{0}(1-\alpha\mu)^{k} \\
+\end{align}
+$$
+
+Thereby demonstrating the convergence $e_k\to0$, or $x_k\to x^*$, as $k\to \infty$
+
+---
+
+- gradient descent in multiple dimensions
+- multiple linear regression with stochastic gradient descent
+- k-means clustering
