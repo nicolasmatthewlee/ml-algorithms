@@ -92,4 +92,7 @@ if __name__ == "__main__":
 
     animation = FuncAnimation(fig, update, frames=len(history), interval=100)
 
+    # 5. save animation
+    animation.save("assets/k_means_clustering.gif", writer="pillow", fps=10)
+
     plt.show()

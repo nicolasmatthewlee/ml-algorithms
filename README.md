@@ -260,7 +260,23 @@ $$
 Let the error of set $S_i$ after $t$ iterations, $e_i^{(t)}$ be defined as follows:
 $$e_i^{(t)}=\sum_{x\in S_i^{(t)}}{\|x-m_i^{(t)}\|^2}$$
 
-Observe that this error is minimized when $m_i^{(t)}$ is the centroid of $S_i^{(t)}$. Therefore, updating $m_1,m_2,...,m_n$ will only result in the total error decreasing or remaining the same. Now consider reassigning an element to set $S_i$. If the element is already in $S_i$, its distance to the nearest centroid remains the same and thus the error contributed by that observation remains the same. If the element is reassigned to $S_j$, it is because the euclidean distance between $m_j$ is less than $m_i$, and therefore the error contributed by that observation will decrease. Therefore, reassigning observations will only result in the total error decreasing or remaining the same. Thus, the k-means algorithm error is a monotonically decreasing function.
+Observe that this error is minimized when $m_i^{(t)}$ is the centroid of $S_i^{(t)}$:
+
+$$
+\begin{align}
+e_i^{(t)}&=\sum_{x\in S_i^{(t)}}{\|x-m_i^{(t)}\|^2} \\
+&=\sum_{x\in S_i^{(t)}}{\|x\|^2-2xm+\|m_i^{(t)}\|^2} \\
+&=\sum_{x\in S_i^{(t)}}{\|x\|^2}-\sum_{x\in S_i^{(t)}}{2xm}+|S_i^{(t)}|\|m_i^{(t)}\|^2 \\
+\frac{\partial e_i^{(t)}}{\partial m_i^{(t)}}&=\frac{\partial}{\partial m_i^{(t)}}\sum_{x\in S_i^{(t)}}{\|x\|^2}-\sum_{x\in S_i^{(t)}}{2xm}+|S_i^{(t)}|\|m_i^{(t)}\|^2  \\
+&= -2\sum_{x\in S_i^{(t)}}{x}+2|S_i^{(t)}|m_i^{(t)} \\
+0 &= -2\sum_{x\in S_i^{(t)}}{x}+2|S_i^{(t)}|m_i^{(t)} \\
+m_i^{(t)} &= \frac{\sum_{x\in S_i^{(t)}}{x}}{|S_i^{(t)}|}
+\end{align}
+$$
+
+Therefore, updating $m_1,m_2,...,m_n$ will only result in the total error decreasing or remaining the same. Now consider reassigning an element to set $S_i$. If the element is already in $S_i$, its distance to the nearest centroid remains the same and thus the error contributed by that observation remains the same. If the element is reassigned to $S_j$, it is because the euclidean distance between $m_j$ is less than $m_i$, and therefore the error contributed by that observation will decrease. Therefore, reassigning observations will only result in the total error decreasing or remaining the same. Thus, the k-means algorithm error is a monotonically decreasing function.
+
+![k-means clustering](assets/k_means_clustering.gif)
 
 ---
 
