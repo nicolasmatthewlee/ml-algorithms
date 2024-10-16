@@ -278,6 +278,17 @@ Therefore, updating $m_1,m_2,...,m_n$ will only result in the total error decrea
 
 ![k-means clustering](assets/k_means_clustering.gif)
 
+## k-nearest neighbors binary classification
+
+The objective is to return the binary classification of a new observation $x^*$ based on a set of $n$ labeled observations $\{(x_1,y_1),(x_2,y_2),...,(x_n,y_n)\}$.
+
+Let $d_i$ be the distance between the $i$th labeled observation and the new observation.
+$$d_i={\|x^*-x_i\|}_2$$
+
+First, calculate all $d_i$ and sort by ascending order. Let $k$ be an odd integer less than or equal to $n$. Let $s$ be the number of elements in the first $k$ elements of the sorted list that have a label of $0$. If $s>k/2$ the new observation is classified as $0$, else the new observation is classified as $1$.
+
+![k-nearest neighbors](assets/knn_binary_classification.png)
+
 ---
 
 - gradient descent in multiple dimensions
