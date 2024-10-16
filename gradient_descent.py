@@ -39,7 +39,8 @@ if __name__ == "__main__":
     f_y = list(map(f, f_x))
 
     # 4. Set up the figure and axis for plotting
-    fig, ax = plt.subplots()
+    fig, ax = plt.subplots(tight_layout=True)
+    fig.canvas.manager.set_window_title("gradient descent")
     ax.set_xticks([])
     ax.set_yticks([])
     ax.spines["top"].set_visible(False)
@@ -66,4 +67,8 @@ if __name__ == "__main__":
         return scatter
 
     animation = FuncAnimation(fig, update, frames=len(results_x), interval=100)
+
+    # 6. save animation
+    animation.save("assets/gradient_descent.gif", writer="pillow", fps=10)
+
     plt.show()

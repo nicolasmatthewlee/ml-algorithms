@@ -232,6 +232,8 @@ $$
 
 Thereby demonstrating the convergence $e_k\to0$, or $x_k\to x^*$, as $k\to \infty$
 
+![gradient descent](assets/gradient_descent.gif)
+
 ## k-means clustering
 
 The objective is to partition a set of $n$ vector-valued observations $x_1,x_2,\dots,x_n$ into $k$ sets $S_1,S_2,...,S_k$.
