@@ -50,8 +50,8 @@ if __name__ == "__main__":
     # 2. perform clustering
     history = k_means_clustering(4, x, 30)
 
-    # 3. Set up the figure and axis for plotting
-    fig, ax = plt.subplots()
+    # 3. set up the figure and axis for plotting
+    fig, ax = plt.subplots(tight_layout=True)
     fig.canvas.manager.set_window_title("k-means clustering")
     ax.set_xlim(0, 1)
     ax.set_ylim(0, 1)
