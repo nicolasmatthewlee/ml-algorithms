@@ -232,7 +232,7 @@ $$
 
 Thereby demonstrating the convergence $e_k\to0$, or $x_k\to x^*$, as $k\to \infty$
 
-![gradient descent](assets/gradient_descent.gif)
+![gradient descent 3d multiple](assets/gradient_descent3d_multiple.gif)
 
 ## k-means clustering
 
@@ -293,5 +293,14 @@ First, calculate all $d_i$ and sort by ascending order. Let $k$ be an odd intege
 
 ---
 
-- gradient descent in multiple dimensions
-- multiple linear regression with stochastic gradient descent
+## notes
+
+image cropping with `imagemagick`
+
+```shell
+magick gradient_descent3d_multiple.gif -coalesce -trim +repage -layers optimize gradient_descent3d_multiple.gif
+```
+
+- stochastic gradient descent
+- support vector machines
+- neural networks
